@@ -3,9 +3,16 @@ variable "project_name" {
   type        = string
 }
 
-variable "ami_id" {
-  description = "The ID of the AMI"
+
+variable "location" {
+  description = "Azure location"
   type        = string
+}
+
+variable "resource_group_name" {
+  description = "Name of the resource group"
+  type        = string
+
 }
 
 variable "subnet_id" {
@@ -13,25 +20,30 @@ variable "subnet_id" {
   type        = string
 }
 
-variable "security_group_id" {
-  description = "The Security group of the instance"
-  type        = string
-}
-
-variable "server_instance_type" {
+variable "server_vm_size" {
   description = "The size of the server"
   type        = string
-  default     = "t3.medium"
+  # default     = ""
 
 }
 
-variable "worker_instance_type" {
+variable "worker_vm_size" {
   description = "The size of the workers"
   type        = string
-  default     = "t3.medium"
+  # default     = ""
 }
 
 variable "ssh_public_key_path" {
-  description = "SSH public key location on control node"
+  description = "Control node's public key"
   type        = string
 }
+
+variable "nsg_id" {
+  description = "The ID of the Network security group"
+  type = string
+}
+
+# variable "vnet_id" {
+#   description = "The ID of the network "
+
+# }

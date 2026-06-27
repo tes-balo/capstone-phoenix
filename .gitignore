@@ -31,3 +31,8 @@ charts/*.tgz
 *.swp
 .idea/
 .vscode/
+
+# TODOS
+
+todo*.md
+TODO.md

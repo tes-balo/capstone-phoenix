@@ -1,6 +1,7 @@
-variable "region" {
-  description = "Region of App"
+variable "location" {
+  description = "Location of App"
   type        = string
+  default = "westeurope"
 }
 
 variable "my_ip" {
@@ -20,16 +21,22 @@ variable "ssh_public_key_path" {
   type        = string
 }
 
-variable "ami_id" {
-  description = "ID of the AMI base image"
+variable "server_vm_size" {
+  description = "Size of the virtual machine (control node)"
+  type        = string
+}
+variable "worker_vm_size" {
+  description = "Size of each virtual machine (worker nodes)"
   type        = string
 }
 
-variable "server_instance_type" {
-  description = "Size of the ec2 server (control node)"
-  type        = string
+variable "resource_group_name" {
+  description = "Name of the resource group"
+  type = string
 }
-variable "worker_instance_type" {
-  description = "Size of each ec2 worker (worker nodes)"
-  type        = string
+
+variable "subscription_id" {
+  description = "ID of the Azure subscription"
+  type = string
+
 }

@@ -3,11 +3,6 @@ variable "project_name" {
   type        = string
 }
 
-variable "vpc_id" {
-  description = "ID of the VPC"
-  type        = string
-}
-
 
 variable "my_ip" {
   description = "My IP address"
@@ -15,3 +10,12 @@ variable "my_ip" {
 
 }
 
+variable "resource_group_name" {
+  description = "Name of the Resource group"
+  type        = string
+}
+
+variable "location" {
+  description = "Azure location"
+  type        = string
+}
