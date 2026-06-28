@@ -13,6 +13,8 @@ module "network" {
   project_name        = var.project_name
   location            = var.location
 
+  depends_on = [azurerm_resource_group.main]
+
 }
 
 module "security" {
@@ -22,6 +24,8 @@ module "security" {
   project_name        = var.project_name
   location            = var.location
   my_ip               = var.my_ip
+
+  depends_on = [azurerm_resource_group.main]
 
 }
 
@@ -36,5 +40,7 @@ module "compute" {
   server_vm_size      = var.server_vm_size
   worker_vm_size      = var.worker_vm_size
   nsg_id              = module.security.nsg_id
+
+  depends_on = [azurerm_resource_group.main]
 
 }

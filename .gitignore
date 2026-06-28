@@ -36,3 +36,7 @@ charts/*.tgz
 
 todo*.md
 TODO.md
+
+# CLAUDE MASTER CONTEXT FILE
+
+CONTEXT.md

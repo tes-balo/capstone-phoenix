@@ -1,7 +1,7 @@
 variable "location" {
   description = "Location of App"
   type        = string
-  default = "westeurope"
+  default     = "westeurope"
 }
 
 variable "my_ip" {
@@ -32,11 +32,11 @@ variable "worker_vm_size" {
 
 variable "resource_group_name" {
   description = "Name of the resource group"
-  type = string
+  type        = string
 }
 
 variable "subscription_id" {
   description = "ID of the Azure subscription"
-  type = string
+  type        = string
 
 }
