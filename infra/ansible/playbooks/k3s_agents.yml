@@ -1,0 +1,21 @@
+---
+- name: Handle k3s token and join worker nodes
+  hosts: agents
+  become: true
+  tasks:
+    - name: Get the k3s join token from control plane
+      ansible.builtin.slurp: ## module
+        src: /var/lib/rancher/k3s/server/node-token ## location of token
+      register: k3s_token ## save the result of the base64 string inside temporary k3s_token variable
+      delegate_to: control_plane ## make this task run on only the node named control_plane
+      run_once: true # fetch this token once for all nodes
+
+    - name: Install k3s on worker nodes and join cluster
+      ansible.builtin.shell: |
+        curl -sfL https://get.k3s.io | \
+        K3S_URL="https://{{ hostvars['control_plane']['private_ip'] }}:6443" \
+        K3S_TOKEN="{{ k3s_token['content'] | b64decode | trim }}" \
+        sh -
+      args:
+        creates: /usr/local/bin/k3s-agent-uninstall.sh
+

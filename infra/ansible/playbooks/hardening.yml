@@ -1,0 +1,53 @@
+---
+- name: SSH hardening
+  hosts: k3s_cluster
+  become: true
+  handlers:
+    - name: Restart SSH Service
+      ansible.builtin.service:
+        name: ssh
+        state: restarted
+  tasks:
+    - name: Disable root login
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        line: "PermitRootLogin no"
+        state: present
+      notify: Restart SSH
+
+
+    - name: Install UFW
+      ansible.builtin.apt:
+        name: ufw
+        state: present
+        update_cache: true
+
+    - name: Allow SSH
+      ufw:
+          rule: allow
+          port: "22"
+
+    - name: Allow HTTP
+      ansible.builtin.ufw:
+          rule: allow
+          port: "80"
+
+    - name: Allow HTTPS
+      ansible.builtin.ufw:
+          rule: allow
+          port: "443"
+
+    - name: Allow internal subnet
+      ansible.builtin.ufw:
+        rule: allow
+        src: "10.0.1.0/24"
+
+    - name: Allow k3s API server (kubectl + worker registration)
+      ansible.builtin.ufw:
+        rule: allow
+        port: "6443"
+
+    - name: Enable UFW
+      ansible.builtin.ufw:
+        state: enabled
+        policy: deny

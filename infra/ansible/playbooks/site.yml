@@ -1,0 +1,5 @@
+---
+- import_playbook: hardening.yml
+- import_playbook: k3s_server.yml
+- import_playbook: k3s_agents.yml
+- import_playbook: kubeconfig.yml
