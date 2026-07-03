@@ -1,0 +1,35 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: taskapp
+  namespace: taskapp
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName:  traefik
+  tls:
+    - hosts:
+      - taskapp.tesbuilds.fun
+      - api.tesbuilds.fun
+      secretName: taskapp-tls
+  rules:
+    - host: taskapp.tesbuilds.fun
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend
+                port:
+                  number: 80
+    - host:  api.tesbuilds.fun
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: backend
+                port:
+                  number: 5000
