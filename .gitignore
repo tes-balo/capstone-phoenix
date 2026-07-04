@@ -39,6 +39,7 @@ charts/*.tgz
 
 todo*.md
 TODO.md
+arch(comprehensive).md
 lessons/
 
 # CLAUDE MASTER CONTEXT FILE
