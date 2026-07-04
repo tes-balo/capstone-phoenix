@@ -20,6 +20,7 @@ node-token
 !.env.example
 *secret*.yaml
 !*secret*.example.yaml
+!gitops/*secret*.yaml
 *.pem
 *.key
 id_rsa*
@@ -37,7 +38,7 @@ charts/*.tgz
 
 todo*.md
 TODO.md
-LEARNINGS.md
+lessons/
 
 # CLAUDE MASTER CONTEXT FILE
 
