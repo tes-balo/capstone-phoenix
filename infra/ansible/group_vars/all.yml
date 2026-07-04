@@ -1,0 +1,5 @@
+calico_version: v3.31.0
+calico_pod_cidr: 10.42.0.0/16
+calico_encapsulation: VXLAN
+service_cidr: 10.43.0.0/16
+tls_san: "{{ hostvars['control_plane']['ansible_host'] }}"

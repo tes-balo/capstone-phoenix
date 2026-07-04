@@ -4,13 +4,30 @@
   become: true
   tasks:
     - name: Install the k3s server on the control-plane
-      ansible.builtin.shell: curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --flannel-backend=none --cluster-init --tls-san={{ hostvars['control_plane']['ansible_host'] }}" sh -
+      ansible.builtin.shell: |
+        curl -sfL https://get.k3s.io | \
+        INSTALL_K3S_EXEC="server \
+        --flannel-backend=none \
+        --cluster-init \
+        --cluster-cidr={{ calico_pod_cidr }} \
+        --service-cidr={{ service_cidr }} 
+        --tls-san={{ tls_san }} \
+        sh -
       args:
         creates: /usr/local/bin/k3s  # skips the task if the file already exists
+      register: k3s_install.changed
+
+    - name: Restart k3s if install changed
+      ansible.builtin.systemd:
+        name: k3s
+        state: restarted
+        daemon_reload: true
+      when: k3s_install.changed
 
     - name: Wait for k3s to be ready
-      ansible.builtin.command: k3s kubectl get nodes
+      ansible.builtin.command: kubectl wait --for=condition=Ready node --all --timeout=300s
       retries: 10
       delay: 10
       register: result
       until: result.rc == 0
+
