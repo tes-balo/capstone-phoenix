@@ -2,21 +2,24 @@
 
 ## Monthly Infrastructure Cost
 
+### Actual Monthly Infrastructure Cost (July 2026)
+
+
 The Kubernetes cluster is deployed on Microsoft Azure using three Ubuntu Linux virtual machines. The infrastructure was intentionally designed to balance production-like architecture with affordability by using burstable B-series virtual machines.
 
-| Resource                           | Quantity | Estimated Monthly Cost (USD) |
-| ---------------------------------- | -------: | ---------------------------: |
-| Standard_B2s_v2 (Control Plane)    |        1 |                      ~$31.00 |
-| Standard_B2ls_v2 (Worker Node)     |        2 | ~$17.00 each (~$34.00 total) |
-| Standard SSD OS Disks (30 GB)      |        3 |                       ~$3.60 |
-| Static Public IP Addresses         |        3 |                      ~$11.00 |
-| Virtual Network                    |        1 |                         Free |
-| Network Security Group             |        1 |                         Free |
-| Azure DNS                          | Not Used |                         Free |
-| Data Transfer (Low Usage Estimate) |        - |                       ~$2.00 |
 
-| **Estimated Total Monthly Cost** | | **~$82.00 USD** |
+Based on Azure Portal Cost Analysis:
 
+| Resource | Quantity | Monthly Cost |
+| --- | --- | --- |
+| Standard_B2s_v2 (Control Plane) | 1 | $63.07 |
+| Standard_B2ls_v2 (Worker Nodes) | 2 | $65.08 |
+| Static Public IP Addresses | 3 | $10.50 |
+| Storage Account (Remote State) | 1 | ~$1.00 |
+| Managed Disks (OS) | 3 | ~$3.60 |
+| Data Transfer | - | ~$2.00 |
+
+**Total: ~$145/month**
 > **Note:** Costs are estimates based on Azure Pay-As-You-Go pricing for the Sweden Central region and assume the virtual machines run continuously for an entire month (approximately 730 hours). Actual charges may vary depending on usage, pricing updates, and outbound network traffic.
 
 ---
