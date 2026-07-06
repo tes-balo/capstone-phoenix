@@ -20,7 +20,7 @@ node-token
 !.env.example
 *secret*.yaml
 !*secret*.example.yaml
-!manifests/backend-secret.yaml
+!manifests/config/backend-secret.yaml
 !gitops/*secret*.yaml
 *.pem
 *.key
