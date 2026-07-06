@@ -14,7 +14,7 @@ spec:
           command: ["sh", "-c", "until pg_isready -h postgres.taskapp.svc.cluster.local -p 5432; do echo 'waiting for postgres...'; sleep 2; done"]
       containers:
         - name: migrate
-          image: ghcr.io/tes-balo/taskapp-backend:5855887
+          image: ghcr.io/ts-a-devops/taskapp-backend:5d6b8fc
           command: ["sh", "-c", "alembic upgrade head"]
 
           envFrom:
