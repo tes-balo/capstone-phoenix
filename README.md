@@ -41,6 +41,10 @@ The project demonstrates the complete DevOps lifecycle—from infrastructure pro
 
 ---
 
+# Live URL Demo
+
+![alt text](docs/EVIDENCE/live-url-demo.png)
+
 # Objectives
 
 This project demonstrates:
@@ -56,58 +60,61 @@ This project demonstrates:
 * Production deployment practices
 * Cloud networking and security
 
+
 ---
 
 # Solution Architecture
 
 ```
-                        GitHub
+                                      GitHub
 
-                           │
-                 GitHub Actions CI/CD
-                           │
-                 Build & Push Images
-                           │
-                         GHCR
-                           │
-             Update Kubernetes Manifests
-                           │
-                       Argo CD
-                           │
-                   Kubernetes Cluster
-                           │
-                     Traefik Ingress
-                ┌──────────┴──────────┐
-                │                     │
-          Frontend Service      Backend Service
-                │                     │
-          Frontend Pods        Backend Pods
-                                      │
-                               PostgreSQL
-                               StatefulSet
-                                      │
-                                     PVC
+                                        │
+                                GitHub Actions CI/CD
+                                        │
+                                Build & Push Images
+                                        │
+                                        GHCR
+                                        │
+                        Update Kubernetes Manifests
+                                        │
+                                Argo CD
+                                        │
+                                Kubernetes Cluster
+                                        │
+                                Traefik Ingress
+                                ┌──────────┴──────────┐
+                                │                     │
+                        Frontend Service      Backend Service
+                                │                     │
+                        Frontend Pods        Backend Pods
+                                                │
+                                        PostgreSQL
+                                        StatefulSet
+                                                │
+                                                PVC
 
-────────────────────────────────────────────────────
+-------------------------------------------------------------------------------------
 
-Infrastructure
+                                Infrastructure
 
-Terraform
-        │
-Azure Resource Group
-        │
-Virtual Network
-        │
-Subnet
-        │
-Network Security Group
-        │
-3 Ubuntu Virtual Machines
-        │
-Ansible
-        │
-k3s Cluster
+                                Terraform
+                                        │
+                                Azure Resource Group
+                                        │
+                                Virtual Network
+                                        │
+                                Subnet
+                                        │
+                                Network Security Group
+                                        │
+                                3 Ubuntu Virtual Machines
+                                        │
+                                Ansible
+                                        │
+                                k3s Cluster
 ```
+
+![alt text](docs/architecture.png)
 
 ---
 

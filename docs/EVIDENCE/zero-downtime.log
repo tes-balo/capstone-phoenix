@@ -1,0 +1,27 @@
+# Continuously checking the health endpoint
+
+$ while true; do
+    curl -sk -o /dev/null -w "%{http_code}\n" https://api.tesbuilds.fun/api/health
+    sleep 0.2
+done
+
+200
+200
+200
+200
+200
+200
+200
+200
+
+# Restart the backend deployment
+
+$ kubectl rollout restart deployment backend -n taskapp
+deployment.apps/backend restarted
+
+# Watch the rollout progress
+
+$ kubectl rollout status deployment/backend -n taskapp
+
+Waiting for deployment "backend" rollout to finish:
+1 out of 2 new replicas have been updated...
