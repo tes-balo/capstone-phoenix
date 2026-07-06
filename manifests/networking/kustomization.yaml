@@ -5,7 +5,7 @@ resources:
   - default-deny.yaml
   - allow-dns.yaml
   - allow-traefik-to-frontend.yaml
-  - allow-traefik-to-backend
+  - allow-traefik-to-backend.yaml
   - allow-frontend-to-backend.yaml
   - allow-backend-to-postgres.yaml
   - allow-migrate-to-postgres.yaml
