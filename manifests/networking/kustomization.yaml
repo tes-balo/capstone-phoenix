@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - default-deny.yaml
+  - allow-dns.yaml
+  - allow-traefik-to-frontend.yaml
+  - allow-frontend-to-backend.yaml
+  - allow-backend-to-postgres.yaml
+  - ingress.yaml
