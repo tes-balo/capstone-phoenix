@@ -1,0 +1,64 @@
+PVC Persistence Evidence
+========================
+
+Date: 2026-07-06
+
+1. Connected to PostgreSQL
+
+$ kubectl exec -it postgres-0 -n taskapp -- psql -U taskapp_user taskapp
+
+psql (16.14 (Debian 16.14-1.pgdg13+1))
+Type "help" for help.
+
+2. Created test table and inserted sample data
+
+taskapp=# CREATE TABLE IF NOT EXISTS evidence (
+    id INT PRIMARY KEY,
+    message TEXT
+);
+
+CREATE TABLE
+
+taskapp=# INSERT INTO evidence VALUES (1, 'Persistence works')
+ON CONFLICT (id) DO NOTHING;
+
+INSERT 0 1
+
+taskapp=# SELECT * FROM evidence;
+
+ id |      message
+----+-------------------
+  1 | Persistence works
+(1 row)
+
+3. Deleted the PostgreSQL Pod
+
+$ kubectl delete pod postgres-0 -n taskapp
+
+pod "postgres-0" deleted from taskapp namespace
+
+4. Kubernetes automatically recreated the Pod
+
+$ kubectl get pods -n taskapp -w
+
+NAME                        READY   STATUS    RESTARTS   AGE
+postgres-0                  1/1     Running   0          6s
+
+5. Reconnected to PostgreSQL after the Pod restart
+
+$ kubectl exec -it postgres-0 -n taskapp -- psql -U taskapp_user taskapp
+
+psql (16.14 (Debian 16.14-1.pgdg13+1))
+Type "help" for help.
+
+taskapp=# SELECT * FROM evidence;
+
+ id |      message
+----+-------------------
+  1 | Persistence works
+(1 row)
+
+Conclusion
+==========
+
+The PostgreSQL Pod was deleted and recreated by the StatefulSet. The test data remained intact after the restart, demonstrating that the PersistentVolumeClaim (PVC) successfully preserved the database data independently of the Pod lifecycle.
