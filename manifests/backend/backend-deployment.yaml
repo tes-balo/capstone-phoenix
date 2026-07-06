@@ -27,7 +27,7 @@ spec:
               app: backend
       containers:
         - name: backend
-          image: ghcr.io/tes-balo/taskapp-backend:15a4a46
+          image: ghcr.io/tes-balo/taskapp-backend:5855887
           ports:
             - containerPort: 5000
           envFrom:
