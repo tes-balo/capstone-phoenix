@@ -28,6 +28,15 @@ spec:
       containers:
         - name: backend
           image: ghcr.io/tes-balo/taskapp-backend:15a4a46
+          command: ["gunicorn"]
+          args:
+            - "--workers"
+            - "3"
+            - "--bind"
+            - "0.0.0.0:5000"
+            - "--access-logfile"
+            - "-"
+            - "run:app"
           ports:
             - containerPort: 5000
           envFrom:
