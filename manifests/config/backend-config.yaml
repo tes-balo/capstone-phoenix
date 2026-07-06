@@ -4,10 +4,9 @@ metadata:
   name: backend-config
   namespace: taskapp
 data:
-  DATABASE_HOST: "postgres"
+  DATABASE_HOST: "postgres.taskapp.svc.cluster.local"
   DATABASE_PORT: "5432"
   DATABASE_NAME: "taskapp"
   FLASK_ENV: "production"
   FLASK_DEBUG: "0"
 
-  
